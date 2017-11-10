@@ -1,36 +1,21 @@
-<style>
-  :focus {
-    outline: 2px solid red;
-  }
-</style>
-
-<x-focus></x-focus>
+foo
+<x-editor></x-editor>
 
 <script>
-customElements.define('x-focus', class extends HTMLElement {
+customElements.define('x-editor', class extends HTMLElement {
   constructor() {
     super(); // always call super() first in the ctor.
 
     const root = this.attachShadow({mode: 'closed'});
     root.innerHTML = `
-      <style>
-        :host {
-          display: flex;
-          border: 1px dotted black;
-          padding: 16px;
-        }
-        :focus {
-          outline: 2px solid blue;
-        }
-      </style>
+      <style> :host { border: 1px dotted black;} </style>
+      <input type="button" value="bold" onClick="bold();">
       <div>Clickable Shadow DOM text</div>
-      <input type="text" placeholder="Input inside dom">`;
-
-    // Know the focused element inside shadow DOM:
-    this.addEventListener('focus', function(e) {
-      console.log('Active element (inside shadow dom):',
-                  this.shadowRoot.activeElement);
-    });
+      `;
+    function bold() {
+      console.log(document.getSelection());
+      console.log(root.getSelection());
+    };
   }
 });
 </script>
