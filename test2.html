@@ -6,8 +6,9 @@ customElements.define('x-editor', class extends HTMLElement {
     super();
     const root = this.attachShadow({mode: 'closed'});
     root.innerHTML = `
-      <div style="border: 1px solid black;"><input type="button" value="bold"">
-      <div contenteditable>edit area</div><div>
+      <div style="border: 1px solid black; width: 100px">
+        <input type="button" value="bold">
+        <div contenteditable>edit area</div><div>
       `;
     root.querySelector('input').onclick = () => {
       console.log(document.getSelection());
