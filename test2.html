@@ -1,18 +1,15 @@
 foo
 <x-editor></x-editor>
-
 <script>
 customElements.define('x-editor', class extends HTMLElement {
   constructor() {
-    super(); // always call super() first in the ctor.
-
+    super();
     const root = this.attachShadow({mode: 'closed'});
     root.innerHTML = `
-      <style> :host { border: 1px dotted black;} </style>
-      <input type="button" value="bold" onClick="bold();">
-      <div>Clickable Shadow DOM text</div>
+      <div style="border: 1px solid black;"><input type="button" value="bold"">
+      <div contenteditable>edit area</div><div>
       `;
-    function bold() {
+    root.querySelector('input').onclick = () => {
       console.log(document.getSelection());
       console.log(root.getSelection());
     };
